@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:layoutexercise/mypage.dart';
 
 void main() {
+  KakaoSdk.init(nativeAppKey: '4005866f1153cc3391697e1762c2b417');
   runApp(const MyApp());
 }
 
@@ -9,8 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ListViewPage(),
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => ListViewPage(),
+        '/my': (context) => mypage(),
+      },
     );
   }
 }
@@ -86,15 +93,10 @@ class _ListViewPageState extends State<ListViewPage> {
             Icon(Icons.arrow_drop_down),
           ],
         ),
-        actions: [
-          Icon(Icons.search),
-          Icon(Icons.menu),
-          Icon(Icons.add_alert)
-        ],
+        actions: [Icon(Icons.search), Icon(Icons.menu), Icon(Icons.add_alert)],
         backgroundColor: Colors.black87,
       ),
-      body:
-      ListView.builder(
+      body: ListView.builder(
         itemCount: productName.length,
         itemBuilder: (context, index) {
           return Container(
@@ -167,61 +169,85 @@ class _ListViewPageState extends State<ListViewPage> {
                   )
                 ],
               ),
-
             ),
           );
         },
       ),
-
       bottomNavigationBar: BottomAppBar(
           color: Colors.black87,
           child: SizedBox(
-            height: 55,
+            height: 70,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.home, color: Colors.white70),
-                    Text('홈', style: TextStyle(color: Colors.white70, fontSize: 10))
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.home),
+                      color: Colors.white70,
+                    ),
+                    Text('홈',
+                        style: TextStyle(color: Colors.white70, fontSize: 10))
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.apartment, color: Colors.white70),
-                    Text('동네생활', style: TextStyle(color: Colors.white70, fontSize: 10))
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.apartment),
+                      color: Colors.white70,
+                    ),
+                    Text('동네생활',
+                        style: TextStyle(color: Colors.white70, fontSize: 10))
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.location_on, color: Colors.white70),
-                    Text('내 근처', style: TextStyle(color: Colors.white70, fontSize: 10))
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.location_on),
+                      color: Colors.white70,
+                    ),
+                    Text('내 근처',
+                        style: TextStyle(color: Colors.white70, fontSize: 10))
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.chat, color: Colors.white70),
-                    Text('채팅', style: TextStyle(color: Colors.white70, fontSize: 10))
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.chat),
+                      color: Colors.white70,
+                    ),
+                    Text('채팅',
+                        style: TextStyle(color: Colors.white70, fontSize: 10))
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.person, color: Colors.white70),
-                    Text('나의 당근', style: TextStyle(color: Colors.white70, fontSize: 10))
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/my');
+                      },
+                      icon: Icon(Icons.person),
+                      color: Colors.white70,
+                    ),
+                    Text('나의 당근',
+                        style: TextStyle(color: Colors.white70, fontSize: 10))
                   ],
                 ),
               ],
             ),
-          )
-      ),
+          )),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
-        onPressed: (){},
+        onPressed: () {},
         child: Icon(Icons.add),
       ),
     );
